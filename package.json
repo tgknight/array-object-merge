@@ -1,0 +1,23 @@
+{
+  "name": "array-object-merge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha **.test.js",
+    "test:watch": "npm run test --watch",
+    "coverage": "nyc --check-coverage --statements 100 --branches 100 --functions 100 --lines 100 --reporter=lcov --reporter=text npm run test"
+  },
+  "author": "Thanapat Bhunnachet",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "nyc": "^11.1.0",
+    "proxyquire": "^1.8.0",
+    "sinon": "^3.2.1"
+  }
+}
