@@ -10,7 +10,7 @@
   "scripts": {
     "test": "mocha **.test.js",
     "test:watch": "npm run test --watch",
-    "coverage": "nyc --check-coverage --statements 100 --branches 100 --functions 100 --lines 100 --reporter=lcov --reporter=text npm run test"
+    "coverage": "nyc --check-coverage --statements 100 --branches 100 --functions 100 --lines 100 --reporter=lcov --reporter=text npm run test && nyc report --reporter=text-lcov | coveralls"
   },
   "author": "Thanapat Bhunnachet",
   "license": "MIT",
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.1",
+    "coveralls": "^2.13.1",
     "mocha": "^3.5.0",
     "nyc": "^11.1.0",
     "proxyquire": "^1.8.0",
