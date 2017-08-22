@@ -1,6 +1,6 @@
 {
   "name": "array-object-merge",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Merge objects with arrays of objects based on given object key",
   "main": "index.js",
   "repository": {
