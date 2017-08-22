@@ -99,9 +99,8 @@ describe('lib', () => {
     it('should call Object.assign()', () => {
       lib.mergeArray(original.roles, update.roles, identifier)
 
-      Object.keys(grouped).map(key => {
-
-        assert(assignSpy.calledWith())
+      Object.keys(grouped).map((key, index) => {
+        assert.deepEqual(assignSpy.getCall(index).args, grouped[key])
       })
     })
   })
