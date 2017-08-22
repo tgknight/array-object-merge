@@ -1,8 +1,12 @@
 {
   "name": "array-object-merge",
   "version": "1.0.1",
-  "description": "",
+  "description": "Merge objects with arrays of objects based on given object key",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tgknight/array-object-merge.git"
+  },
   "scripts": {
     "test": "mocha **.test.js",
     "test:watch": "npm run test --watch",
