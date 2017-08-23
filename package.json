@@ -1,6 +1,6 @@
 {
   "name": "array-object-merge",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Merge objects with arrays of objects based on given object key",
   "main": "index.js",
   "repository": {
@@ -14,7 +14,16 @@
   },
   "author": "Thanapat Bhunnachet",
   "license": "MIT",
-  "keywords": [ "object", "arrays", "array", "merge", "deep", "key", "by", "in" ],
+  "keywords": [
+    "object",
+    "arrays",
+    "array",
+    "merge",
+    "deep",
+    "key",
+    "by",
+    "in"
+  ],
   "dependencies": {
     "lodash": "^4.17.4"
   },
