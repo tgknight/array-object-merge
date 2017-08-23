@@ -14,6 +14,7 @@
   },
   "author": "Thanapat Bhunnachet",
   "license": "MIT",
+  "keywords": [ "object", "arrays", "array", "merge", "deep", "key", "by", "in" ],
   "dependencies": {
     "lodash": "^4.17.4"
   },
