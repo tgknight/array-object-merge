@@ -4,16 +4,26 @@ const { groupBy } = require('lodash')
 
 let lib = {}
 
-lib.groupByCriteria = (obj, identifier) => obj[identifier]
-
-lib.mergeArray = (arr1, arr2, identifier) => {
-  let grouped = groupBy([].concat(arr2, arr1), obj => lib.groupByCriteria(obj, identifier))
-  return Object.keys(grouped).map(key => Object.assign.apply({}, grouped[key]))
+lib.groupByCriteria = (obj, identifiers) => {
+  let identifier = identifiers.filter(id =>
+    Object.keys(obj).includes(id)
+  )  
+  return obj[identifier]
 }
 
-lib.mergeCustomizer = identifier => (
+lib.mergeArray = (arr1, arr2, identifiers) => {
+  let grouped = groupBy(
+    [].concat(arr2, arr1),
+    obj => lib.groupByCriteria(obj, identifiers)
+  )
+  return Object.keys(grouped).map(
+    key => Object.assign.apply(null, grouped[key])
+  )
+}
+
+lib.mergeCustomizer = identifiers => (
   (target, source) => Array.isArray(target) && Array.isArray(source) ?
-    lib.mergeArray(source, target, identifier) :
+    lib.mergeArray(source, target, identifiers) :
     undefined
 )
 

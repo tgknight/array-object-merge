@@ -6,37 +6,69 @@ const sinon = require('sinon')
 
 describe('array-object-merge', () => {
   let lodash, lib, array_object_merge
-  let original, update, identifier
+  let mergeWithSpy, mergeCustomizerSpy
+  let original, update, result, identifiers
 
   beforeEach(() => {
-    let original = {
+    original = {
       roles: [{
         key: 'a', value: 'ori'
       }, {
         key: 'b', value: 'ori'
+      }],
+      props: [{
+        type: 'a', content: 'ori'
+      }, {
+        type: 'b', content: 'ori'
       }]
     }
-
-    let update = {
+    update = {
       field: 'newkey',
       roles: [{
-        key: 'b', value: 'update'
+        key: 'b', value: 'up'
       }, {
         key: 'c', value: 'ori'
+      }],
+      props: [{
+        type: 'b', content: 'up'
+      }, {
+        type: 'c', content: 'ori'
       }]
     }
-    identifier = 'key'
+    result = {
+      field: 'newkey',
+      roles: [{
+        key: 'a', value: 'ori'
+      }, {
+        key: 'b', value: 'up'
+      }, {
+        key: 'c', value: 'ori'
+      }],
+      props: [{
+        type: 'a', content: 'ori'
+      }, {
+        type: 'b', content: 'up'
+      }, {
+        type: 'c', content: 'ori'
+      }]
+    }
+    identifiers = [ 'key', 'type' ]
 
-    lodash = {
-      mergeWith: sinon.spy()
-    }
-    lib = {
-      mergeCustomizer: sinon.spy()
-    }
+    lodash = require('lodash')
+    mergeWithSpy = sinon.spy(lodash, 'mergeWith')
+
+    lib = require('./lib')
+    mergeCustomizerSpy = sinon.spy(lib, 'mergeCustomizer')
+
     array_object_merge = proxyquire('./index', {
       'lodash': lodash,
       './lib': lib
     })
+  })
+
+  afterEach(() => {
+    lodash.mergeWith.restore()
+    lib.mergeCustomizer.restore()
   })
 
   it('should export a function accepting three arguments', () => {
@@ -45,15 +77,22 @@ describe('array-object-merge', () => {
   })
 
   it('should call mergeWith()', () => {
-    array_object_merge(original, update, identifier)
+    array_object_merge(original, update, identifiers)
 
-    assert(lodash.mergeWith.firstCall.calledWith(original, update))
-    assert(typeof lodash.mergeWith.firstCall.args[2], 'function')
+    assert(mergeWithSpy.firstCall.calledWith(original, update))
+    assert(typeof mergeWithSpy.firstCall.args[2], 'function')
   })
 
   it('should call mergeCustomizer()', () => {
-    array_object_merge(original, update, identifier)
+    array_object_merge(original, update, identifiers)
 
-    assert(lib.mergeCustomizer.firstCall.calledWith(identifier))
+    assert(mergeCustomizerSpy.firstCall.calledWith(identifiers))
+  })
+
+  it('should work properly', () => {
+    assert.deepEqual(
+      array_object_merge(original, update, identifiers),
+      result
+    )
   })
 })
