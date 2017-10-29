@@ -5,15 +5,25 @@ let original = {
     key: 'a', value: 'ori'
   }, {
     key: 'b', value: 'ori'
+  }],
+  props: [{
+    type: 'a', content: 'ori'
+  }, {
+    type: 'b', content: 'ori'
   }]
 }
 
 let update = {
   field: 'newkey',
   roles: [{
-    key: 'b', value: 'update'
+    key: 'b', value: 'up'
   }, {
     key: 'c', value: 'ori'
+  }],
+  props: [{
+    type: 'b', content: 'up'
+  }, {
+    type: 'c', content: 'ori'
   }]
 }
 
@@ -25,10 +35,17 @@ const merge = require('./index')
  *   roles: [{
  *     key: 'a', value: 'ori'
  *   }, {
- *     key: 'b', value: 'update'
+ *     key: 'b', value: 'up'
  *   }, {
- *     key: 'c', value: 'ori
+ *     key: 'c', value: 'ori'
+ *   }],
+ *   props: [{
+ *     type: 'a', content: 'ori'
+ *   }, {
+ *     type: 'b', content: 'up'
+ *   }, {
+ *     type: 'c', content: 'ori'
  *   }]
- * }
+}
  */
-let result = merge(original, update, 'key')
+let result = merge(original, update, [ 'key', 'type' ])

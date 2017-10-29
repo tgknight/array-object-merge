@@ -4,9 +4,9 @@
 
 Merge two objects with arrays of objects based on given object key (idenfitier).
 This package wraps [object-array-merge](https://www.npmjs.com/package/object-array-merge)
-with `lodash.mergeWith`, using it as a customizer.
+with `lodash.mergeWith`, using it as a customizer, and modifies some logic for extra functionalities.
 
-Currently only support multiple arrays with one identical object key.
+Supports multiple arrays with one or more identical object keys.
 
 ```js
 let original = {
@@ -20,16 +20,14 @@ let update = {
 const merge = require('array-object-merge')
 merge(original, update, 'id')
 /* output = {
-  arr: [{ id: 1, key: 'value' }, { id: 2, key: 'newValue' }, { id: 3, key: 'value' }],
+  arr: [
+    { id: 1, key: 'value' },
+    { id: 2, key: 'newValue' },
+    { id: 3, key: 'value' }
+  ],
   field: 'newkey'
 } */
 ```
-
-Polyfill for `Object.assign` - `object-assign` was removed, and the code is written in ES6 syntax.
-
-## TODO
-
-* Support multiple arrays with mutually exclusive identifier
 
 ```js
 // support merging of these objects
@@ -39,16 +37,20 @@ let original = {
 }
 let update = {
   arr1: [{ id: 2, key: 'newValue' }],
-  arr2: [{ _id: 1, key: 'newValue' }]
+  arr2: [{ _id: 1, key: 'newValue' }],
+  field: 'newkey'
 }
 
 const merge = require('array-object-merge')
-merge(original, update, [ 'id', '_id' ]) // Not finalize, suspected to be changed
+merge(original, update, [ 'id', '_id' ])
 /* output = {
   arr1: [{ id: 1, key: 'value' }, { id: 2, key: 'newValue' }],
-  arr2: [{ _id: 1, key: 'newValue' }, { _id: 2, key: 'value' }]
+  arr2: [{ _id: 1, key: 'newValue' }, { _id: 2, key: 'value' }],
+  field: 'newkey'
 } */
 ```
+
+Polyfill for `Object.assign` - `object-assign` was removed, and the code is written in ES6 syntax.
 
 ## Credits
 
