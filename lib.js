@@ -5,9 +5,11 @@ const { groupBy } = require('lodash')
 let lib = {}
 
 lib.groupByCriteria = (obj, identifiers) => {
-  let identifier = identifiers.filter(id =>
-    Object.keys(obj).includes(id)
-  )  
+  let identifier = Array.isArray(identifiers) ?
+    identifiers.filter(id =>
+      Object.keys(obj).includes(id)
+    ) :
+    identifiers  
   return obj[identifier]
 }
 

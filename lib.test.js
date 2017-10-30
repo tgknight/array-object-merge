@@ -79,13 +79,22 @@ describe('lib', () => {
       assert.equal(lib.groupByCriteria.length, 2)
     })
 
+    it('should accept both string and array for the second argument', () => {
+      let obj = { key: 'a' }
+      let identifiers = [ 'key', 'type' ]
+
+      assert.isOk(lib.groupByCriteria(obj, 'key'))
+      assert.isOk(lib.groupByCriteria(obj, identifiers))
+    })
+
     it('should return a property of an object specified in the arguments', () => {
       let obj1 = { key: 'a' }
       let obj2 = { type: 'a' }
       let identifiers = [ 'key', 'type' ]
 
-      assert.equal(lib.groupByCriteria(obj1, identifiers), obj1['key'])
-      assert.equal(lib.groupByCriteria(obj2, identifiers), obj2['type'])
+      assert.equal(lib.groupByCriteria(obj1, 'key'), obj1.key)
+      assert.equal(lib.groupByCriteria(obj1, identifiers), obj1.key)
+      assert.equal(lib.groupByCriteria(obj2, identifiers), obj2.type)
     })
   })
 
