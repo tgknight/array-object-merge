@@ -1,4 +1,4 @@
-# array-object-merge [![CircleCI](https://circleci.com/gh/tgknight/array-object-merge.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/tgknight/array-object-merge) [![Coverage Status](https://coveralls.io/repos/github/tgknight/array-object-merge/badge.svg?branch=master)](https://coveralls.io/github/tgknight/array-object-merge?branch=master)
+# array-object-merge [![CircleCI](https://circleci.com/gh/tnptop/array-object-merge.svg?style=svg)](https://circleci.com/gh/tnptop/array-object-merge) [![Coverage Status](https://coveralls.io/repos/github/tnptop/array-object-merge/badge.svg?branch=master)](https://coveralls.io/github/tnptop/array-object-merge?branch=master)
 
 > Merge two objects with arrays of objects based on given object key(s)
 
