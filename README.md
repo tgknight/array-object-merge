@@ -62,3 +62,6 @@ merge(original, update, [ 'id', '_id' ])
 ## Credits
 
 * [@tomgco](https://www.npmjs.com/~tomgco), the author of [object-array-merge](https://www.npmjs.com/package/object-array-merge), for basis of this pacakge.
+
+## License
+This library is under an [MIT License](https://github.com/tnptop/array-object-merge/blob/master/LICENSE).
