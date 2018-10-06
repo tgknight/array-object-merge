@@ -1,6 +1,6 @@
 'use strict'
 
-const { groupBy } = require('lodash')
+const groupBy = require('lodash.groupby')
 
 let lib = {}
 
@@ -9,7 +9,7 @@ lib.groupByCriteria = (obj, identifiers) => {
     identifiers.filter(id =>
       Object.keys(obj).includes(id)
     ) :
-    identifiers  
+    identifiers
   return obj[identifier]
 }
 

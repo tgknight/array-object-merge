@@ -1,6 +1,6 @@
 {
   "name": "array-object-merge",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Merge objects with arrays of objects based on given object key",
   "main": "index.js",
   "repository": {
@@ -25,14 +25,15 @@
     "in"
   ],
   "dependencies": {
-    "lodash": "^4.17.4"
+    "lodash.groupby": "^4.6.0",
+    "lodash.mergewith": "^4.6.1"
   },
   "devDependencies": {
-    "chai": "^4.1.1",
-    "coveralls": "^2.13.1",
-    "mocha": "^3.5.0",
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.2",
+    "mocha": "^5.2.0",
     "nyc": "^11.1.0",
     "proxyquire": "^1.8.0",
-    "sinon": "^3.2.1"
+    "sinon": "^6.3.5"
   }
 }

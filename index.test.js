@@ -5,7 +5,7 @@ const proxyquire = require('proxyquire').noCallThru()
 const sinon = require('sinon')
 
 describe('array-object-merge', () => {
-  let lodash, lib, array_object_merge
+  let lodashMergeWith, lib, array_object_merge
   let mergeWithSpy, mergeCustomizerSpy
   let original, update, result, identifiers
 
@@ -54,20 +54,19 @@ describe('array-object-merge', () => {
     }
     identifiers = [ 'key', 'type' ]
 
-    lodash = require('lodash')
-    mergeWithSpy = sinon.spy(lodash, 'mergeWith')
+    lodashMergeWith = require('lodash.mergewith')
+    mergeWithSpy = sinon.spy(lodashMergeWith)
 
     lib = require('./lib')
     mergeCustomizerSpy = sinon.spy(lib, 'mergeCustomizer')
 
     array_object_merge = proxyquire('./index', {
-      'lodash': lodash,
+      'lodash.mergewith': mergeWithSpy,
       './lib': lib
     })
   })
 
   afterEach(() => {
-    lodash.mergeWith.restore()
     lib.mergeCustomizer.restore()
   })
 
@@ -90,6 +89,8 @@ describe('array-object-merge', () => {
   })
 
   it('should work properly', () => {
+    // load with real dependencies
+    array_object_merge = require('./index')
     assert.deepEqual(
       array_object_merge(original, update, identifiers),
       result

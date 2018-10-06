@@ -5,7 +5,7 @@ const proxyquire = require('proxyquire').noCallThru()
 const sinon = require('sinon')
 
 describe('lib', () => {
-  let groupByStub, lodash, lib, original, update, result
+  let groupByStub, lib, original, update, result
   let grouped
 
   beforeEach(() => {
@@ -67,9 +67,8 @@ describe('lib', () => {
     groupByStub.onCall(0).returns(grouped.roles)
     groupByStub.onCall(1).returns(grouped.props)
 
-    lodash = { groupBy: groupByStub }
     lib = proxyquire('./lib', {
-      'lodash': lodash
+      'lodash.groupby': groupByStub
     })
   })
 
@@ -122,7 +121,7 @@ describe('lib', () => {
     })
 
     it('should return an array with merged objects', () => {
-      applyGrouped(key => 
+      applyGrouped(key =>
         assert.deepEqual(
           lib.mergeArray(original[key], update[key], identifiers),
           result[key]
@@ -130,23 +129,23 @@ describe('lib', () => {
       )
     })
 
-    it('should call lodash.groupBy()', () => {
+    it('should call groupBy()', () => {
       applyGrouped((key, index) => {
         lib.mergeArray(original[key], update[key], identifiers)
 
-        assert(lodash.groupBy.getCall(index).calledWith(concatenatedArray[key]))
+        assert(groupByStub.getCall(index).calledWith(concatenatedArray[key]))
       })
     })
 
     it('should call groupByCriteria()', () => {
       applyGrouped(key => {
         lib.mergeArray(original[key], update[key], identifiers)
-        lodash.groupBy.yield(original[key][0])
-        
+        groupByStub.yield(original[key][0])
+
         assert(groupByCriteriaSpy.calledWith(original[key][0], identifiers))
       })
     })
-    
+
     it('should call Object.assign()', () => {
       applyGrouped(key => {
         lib.mergeArray(original[key], update[key], identifiers)
@@ -173,7 +172,7 @@ describe('lib', () => {
       assert.equal(lib.mergeCustomizer.length, 1)
     })
 
-    it('should return a lodash.mergeWith() customizer accepting two arguments', () => {
+    it('should return a mergeWith() customizer accepting two arguments', () => {
       let customizer = lib.mergeCustomizer(identifiers)
 
       assert.equal(typeof customizer, 'function')
@@ -181,7 +180,7 @@ describe('lib', () => {
     })
 
     describe('customizer()', () => {
-      let customizer, source, target, mergeArraySpy
+      let customizer, mergeArraySpy
 
       beforeEach(() => {
         customizer = lib.mergeCustomizer(identifiers)
@@ -209,9 +208,9 @@ describe('lib', () => {
           [ [ 'target' ], {} ],
           [ {}, {} ]
         ]
-        
+
         argumentList.forEach(argument => {
-          assert.equal(customizer.apply(undefined, argument), undefined)
+          assert.equal(customizer.apply(null, argument), undefined)
         })
       })
     })
