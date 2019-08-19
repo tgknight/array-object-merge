@@ -33,7 +33,7 @@ merge(original, update, identifiers)
 ```
 
 ### ES6
-```ecmascript 6
+```js
 import merge from 'array-object-merge'
 
 merge(original, update, identifiers)
