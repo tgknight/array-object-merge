@@ -1,6 +1,6 @@
 {
   "name": "array-object-merge",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Merge objects with arrays of objects based on given object key",
   "main": "index.js",
   "repository": {
@@ -8,10 +8,10 @@
     "url": "https://github.com/tgknight/array-object-merge.git"
   },
   "scripts": {
-    "test": "mocha **.test.js",
+    "test": "mocha test/**.test.js",
     "test:watch": "npm run test --watch",
-    "coverage": "nyc --check-coverage --statements 100 --branches 100 --functions 100 --lines 100 --reporter=lcov --reporter=text npm run test && nyc report --reporter=text-lcov",
-    "coveralls": "npm run coverage | coveralls"
+    "coverage": "nyc --check-coverage --statements 100 --branches 100 --functions 100 --lines 100 --reporter=lcov --reporter=text npm run test",
+    "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls"
   },
   "author": "Thanapat Bhunnachet",
   "license": "MIT",
@@ -26,6 +26,7 @@
     "in"
   ],
   "dependencies": {
+    "lodash.clonedeep": "^4.5.0",
     "lodash.groupby": "^4.6.0",
     "lodash.mergewith": "^4.6.2"
   },

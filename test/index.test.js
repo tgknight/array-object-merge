@@ -20,7 +20,9 @@ describe('array-object-merge', () => {
         type: 'a', content: 'ori'
       }, {
         type: 'b', content: 'ori'
-      }]
+      }],
+      dict: { key: 'ori' },
+      primitives: [ 'old1', 'old2', 1, 2 ]
     }
     update = {
       field: 'newkey',
@@ -33,7 +35,10 @@ describe('array-object-merge', () => {
         type: 'b', content: 'up'
       }, {
         type: 'c', content: 'ori'
-      }]
+      },
+      'test'],
+      dict: { key: 'up' },
+      primitives: [ 'new3', 'new4', 3, 4 ]
     }
     result = {
       field: 'newkey',
@@ -50,17 +55,20 @@ describe('array-object-merge', () => {
         type: 'b', content: 'up'
       }, {
         type: 'c', content: 'ori'
-      }]
+      },
+      'test'],
+      dict: { key: 'up' },
+      primitives: [ 'new3', 'new4', 3, 4 ]
     }
     identifiers = [ 'key', 'type' ]
 
     lodashMergeWith = require('lodash.mergewith')
     mergeWithSpy = sinon.spy(lodashMergeWith)
 
-    lib = require('./lib')
+    lib = require('../lib')
     mergeCustomizerSpy = sinon.spy(lib, 'mergeCustomizer')
 
-    array_object_merge = proxyquire('./index', {
+    array_object_merge = proxyquire('../index', {
       'lodash.mergewith': mergeWithSpy,
       './lib': lib
     })
@@ -90,7 +98,7 @@ describe('array-object-merge', () => {
 
   it('should work properly', () => {
     // load with real dependencies
-    array_object_merge = require('./index')
+    array_object_merge = require('../index')
     assert.deepEqual(
       array_object_merge(original, update, identifiers),
       result
